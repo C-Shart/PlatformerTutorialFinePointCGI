@@ -1,0 +1,109 @@
+[gd_scene load_steps=11 format=3 uid="uid://dg75ebll3shmq"]
+
+[ext_resource type="Texture2D" uid="uid://u3kvk2gwnfey" path="res://Assets/Sprites/_celeste_pico_8bit_player.png" id="1_8l0xi"]
+[ext_resource type="Script" path="res://Scripts/PlayerController.cs" id="1_a26lh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7108q"]
+size = Vector2(10, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oehix"]
+atlas = ExtResource("1_8l0xi")
+region = Rect2(35, 18, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q35pk"]
+atlas = ExtResource("1_8l0xi")
+region = Rect2(1, 1, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ik2m4"]
+atlas = ExtResource("1_8l0xi")
+region = Rect2(1, 18, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k36pi"]
+atlas = ExtResource("1_8l0xi")
+region = Rect2(18, 18, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_38av3"]
+atlas = ExtResource("1_8l0xi")
+region = Rect2(18, 1, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3g31u"]
+atlas = ExtResource("1_8l0xi")
+region = Rect2(35, 1, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tmii2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oehix")
+}],
+"loop": true,
+"name": &"dash",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q35pk")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ik2m4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k36pi")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_38av3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3g31u")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="PlayerCeleste" type="CharacterBody2D"]
+script = ExtResource("1_a26lh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_7108q")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_tmii2")
+animation = &"walk"
+frame_progress = 0.0753764
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+limit_left = 0
+limit_top = 0
+limit_right = 1200
+limit_bottom = 800
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+rotation = 1.5708
+target_position = Vector2(0, 11)
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+rotation = -1.5708
+target_position = Vector2(0, 11)
+
+[node name="RayCastLeftClimb" type="RayCast2D" parent="."]
+position = Vector2(0, 8)
+rotation = 1.5708
+target_position = Vector2(0, 11)
+
+[node name="RayCastRightClimb" type="RayCast2D" parent="."]
+position = Vector2(0, 8)
+rotation = -1.5708
+target_position = Vector2(0, 11)
