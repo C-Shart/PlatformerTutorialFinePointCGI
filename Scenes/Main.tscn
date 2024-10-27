@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://c8n7diqd7i6d1"]
+[gd_scene load_steps=3 format=3 uid="uid://6n25v8k442sb"]
 
 [ext_resource type="PackedScene" uid="uid://h4qbujf84334" path="res://Scenes/LevelTest.tscn" id="1_p3pce"]
 [ext_resource type="PackedScene" uid="uid://dg75ebll3shmq" path="res://Scenes/PlayerCeleste.tscn" id="2_hk57s"]

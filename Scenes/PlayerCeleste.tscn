@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://dg75ebll3shmq"]
+[gd_scene load_steps=12 format=3 uid="uid://dg75ebll3shmq"]
 
 [ext_resource type="Texture2D" uid="uid://u3kvk2gwnfey" path="res://Assets/Sprites/_celeste_pico_8bit_player.png" id="1_8l0xi"]
 [ext_resource type="Script" path="res://Scripts/PlayerController.cs" id="1_a26lh"]
+[ext_resource type="PackedScene" uid="uid://bu6whdvgv8b1r" path="res://Scenes/GhostPlayer.tscn" id="2_3evaa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7108q"]
 size = Vector2(10, 15)
@@ -18,7 +19,7 @@ region = Rect2(1, 1, 16, 16)
 atlas = ExtResource("1_8l0xi")
 region = Rect2(1, 18, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_k36pi"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6246"]
 atlas = ExtResource("1_8l0xi")
 region = Rect2(18, 18, 16, 16)
 
@@ -51,12 +52,17 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ik2m4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_k36pi")
 }],
 "loop": true,
-"name": &"jump",
+"name": &"jump pre",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n6246")
+}],
+"loop": true,
+"name": &"jumping",
 "speed": 5.0
 }, {
 "frames": [{
@@ -73,15 +79,15 @@ animations = [{
 
 [node name="PlayerCeleste" type="CharacterBody2D"]
 script = ExtResource("1_a26lh")
+GhostPlayerInstance = ExtResource("2_3evaa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_7108q")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tmii2")
-animation = &"walk"
-frame_progress = 0.0753764
+animation = &"idle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)

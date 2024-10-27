@@ -5,12 +5,12 @@ public partial class PlayerController : CharacterBody2D
 {
 
     private Vector2 _velocity = new Vector2();
-    private int _speed = 350;
+    private int _speed = 250;
     private int _gravity = 700;
     private int _jumpHeight = 400;
     private float _friction = .25f;
     private float _acceleration = 0.1f;
-    private int _dashSpeed = 750;
+    private int _dashSpeed = 600;
     private float _dashTimer = .2f;
     private float _dashTimerReset = .2f;
     private bool _isDashing = false;
@@ -24,11 +24,16 @@ public partial class PlayerController : CharacterBody2D
     private float _climbReset = 5f;
     private bool _isClimbing = false;
 
+    [Export] public PackedScene GhostPlayerInstance;
+
+    private AnimatedSprite2D _animationNode;
 
     public override void _Ready()
     {
         Velocity = Vector2.Zero;
         UpDirection = Vector2.Up;
+
+        _animationNode = GetNode<AnimatedSprite2D>("Sprite");
     }
 
     public override void _Process(double delta)
@@ -39,22 +44,22 @@ public partial class PlayerController : CharacterBody2D
     public override void _PhysicsProcess(double delta)
     {
 
-        _isDashAvailable = true;
-
-        if(!IsOnFloor()){
-            // _velocity.Y += _gravity * (float)delta;         // Gravity
-            _isDashAvailable = false;
-        }
-
         if(!_isDashing && !_isWallJumping){
             _ProcessMovement((float)delta);
         }
 
         // Jumping
         if(IsOnFloor()){
-            if(Input.IsActionJustPressed("jump")){
+            if(Input.IsActionPressed("jump")){
+                _animationNode.Play("jump pre");
+                // _velocity.X = Mathf.Lerp(_velocity.X, 0, _friction);
+                _velocity.X = 0;
+            }
+            else if(Input.IsActionJustReleased("jump")){
                 _velocity.Y = -_jumpHeight;
-            }else{
+                _animationNode.Play("jumping");
+            }
+            else{
                 _velocity.Y = 0;
             }
             _isDashAvailable = true;
@@ -73,10 +78,17 @@ public partial class PlayerController : CharacterBody2D
 
         if(_isDashing){
             _dashTimer -= (float)delta;
+            GhostPlayer ghost = GhostPlayerInstance.Instantiate() as GhostPlayer;
+            Owner.AddChild(ghost);
+            ghost.GlobalPosition = this.GlobalPosition;
+            ghost.SetHValue(_animationNode.FlipH);
+
             if(_dashTimer <= 0){
                 _isDashing = false;
                 _velocity = Vector2.Zero;
-                _isDashAvailable = true;
+                if(!IsOnFloor()){
+                    _isDashAvailable = false;
+                }
             }
         }else{
             _velocity.Y += _gravity * (float)delta;         // Gravity
@@ -98,8 +110,13 @@ public partial class PlayerController : CharacterBody2D
 
         if(direction != 0){
             _velocity.X = Mathf.Lerp(_velocity.X, direction * _speed, _acceleration);
+            if(IsOnFloor()){
+                _animationNode.Play("walk");
+                _animationNode.FlipH = _velocity.X < 0;
+            }
         }else{
             _velocity.X = Mathf.Lerp(_velocity.X, 0, _friction);
+            _animationNode.Play("idle");
         }
     }
 
@@ -117,6 +134,8 @@ public partial class PlayerController : CharacterBody2D
         }
 
         if(_isWallJumping){
+            _animationNode.Play("jumping");
+            _animationNode.FlipH = _velocity.X < 0;
             _wallJumpTimer -= delta;
             if(_wallJumpTimer <= 0){
                 _isWallJumping = false;
@@ -128,6 +147,7 @@ public partial class PlayerController : CharacterBody2D
     private void _ProcessDash(float delta)
     {
         if(Input.IsActionJustPressed("dash")){
+            _animationNode.Play("dash");
             if(Input.IsActionPressed("ui_left")){
                 _velocity.X = -_dashSpeed;
                 _velocity.Y = 0;
