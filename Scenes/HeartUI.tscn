@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://n4acs8cayys4"]
+
+[ext_resource type="Script" path="res://Scripts/HeartUI.cs" id="1_ra1jh"]
+[ext_resource type="Texture2D" uid="uid://f7kn0ax0gqlk" path="res://Assets/Env/hearts.png" id="2_08rsg"]
+
+[node name="HeartUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 55.0
+offset_bottom = 55.0
+script = ExtResource("1_ra1jh")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_top = 9.0
+offset_right = 16.0
+offset_bottom = 25.0
+texture = ExtResource("2_08rsg")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 18.0
+offset_right = 30.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 22
+text = "0"

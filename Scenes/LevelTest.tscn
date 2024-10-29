@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://h4qbujf84334"]
+[gd_scene load_steps=6 format=3 uid="uid://h4qbujf84334"]
 
 [ext_resource type="Texture2D" uid="uid://bu28gimcysm0k" path="res://Assets/Env/_celeste_pico_8bit_worldtiles.png" id="1_3twmm"]
+[ext_resource type="Texture2D" uid="uid://f7kn0ax0gqlk" path="res://Assets/Env/hearts.png" id="2_243ac"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m1uj6"]
 texture = ExtResource("1_3twmm")
@@ -166,6 +167,7 @@ separation = Vector2i(1, 1)
 4:5/0 = 0
 4:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:5/0/physics_layer_0/angular_velocity = 0.0
+4:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.1875, 3.9375, -3.4375, -2.3125, 0.5625, 6, 4.5, -2.375, 8, 4.0625, 8, 8, -8, 8, -8, 6)
 3:5/0 = 0
 3:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:5/0/physics_layer_0/angular_velocity = 0.0
@@ -223,10 +225,36 @@ separation = Vector2i(1, 1)
 3:7/0/physics_layer_0/angular_velocity = 0.0
 3:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mmsf8"]
+texture = ExtResource("2_243ac")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4.00571, -4.98543, 2.97638, -5.01023, 4.99783, -2.96398, 5.03968, 0.0787454, 0, 4.99846, -0.973385, 4.98969, -6.01357, -0.0556812, -6.00236, -2.98878)
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+3:0/0 = 0
+3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:0/0/physics_layer_0/angular_velocity = 0.0
+4:0/0 = 0
+4:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+4:0/0/physics_layer_0/angular_velocity = 0.0
+
 [sub_resource type="TileSet" id="TileSet_4cq53"]
 physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 2
 sources/0 = SubResource("TileSetAtlasSource_m1uj6")
+sources/1 = SubResource("TileSetAtlasSource_mmsf8")
 
 [node name="LevelTest" type="TileMap"]
 tile_set = SubResource("TileSet_4cq53")
 format = 2
+layer_0/name = "Platforms"
+layer_1/name = "Obstacles"
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "Pickups"
+layer_2/tile_data = PackedInt32Array()
