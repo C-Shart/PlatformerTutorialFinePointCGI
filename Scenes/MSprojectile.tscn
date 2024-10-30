@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwqakjl3fxjot"]
+
+[ext_resource type="Script" path="res://Scripts/MSProjectile.cs" id="1_7j4uq"]
+[ext_resource type="Texture2D" uid="uid://bhnmfqn5af74a" path="res://Assets/Sprites/MetalSonic/MS_projectile.png" id="2_40xoi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x78ac"]
+radius = 5.0
+
+[node name="Projectile" type="Node2D"]
+script = ExtResource("1_7j4uq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_40xoi")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_x78ac")
+
+[connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]

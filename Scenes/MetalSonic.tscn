@@ -1,0 +1,93 @@
+[gd_scene load_steps=10 format=3 uid="uid://ct5c22drc2nvr"]
+
+[ext_resource type="Script" path="res://Scripts/Enemy.cs" id="1_r81c5"]
+[ext_resource type="Texture2D" uid="uid://cno33fw75x3s4" path="res://Assets/Sprites/MetalSonic/MS_myframes.png" id="2_f2kyc"]
+[ext_resource type="PackedScene" uid="uid://bwqakjl3fxjot" path="res://Scenes/MSprojectile.tscn" id="3_olc5k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6vvf"]
+atlas = ExtResource("2_f2kyc")
+region = Rect2(48, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5elhy"]
+atlas = ExtResource("2_f2kyc")
+region = Rect2(96, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whhfp"]
+atlas = ExtResource("2_f2kyc")
+region = Rect2(144, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i1fjm"]
+atlas = ExtResource("2_f2kyc")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q0tmm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n6vvf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5elhy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n6vvf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5elhy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n6vvf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5elhy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n6vvf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5elhy")
+}],
+"loop": false,
+"name": &"detected",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whhfp")
+}],
+"loop": true,
+"name": &"firing",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i1fjm")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kqqn2"]
+radius = 168.027
+
+[node name="Enemy" type="Node2D"]
+script = ExtResource("1_r81c5")
+Projectile = ExtResource("3_olc5k")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_q0tmm")
+animation = &"idle"
+
+[node name="Detection Radius" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection Radius"]
+shape = SubResource("CircleShape2D_kqqn2")
+
+[node name="ProjectileSpawn" type="Marker2D" parent="."]
+
+[node name="Projectile" parent="." instance=ExtResource("3_olc5k")]
+
+[connection signal="body_entered" from="Detection Radius" to="." method="OnDetectRadiusEnter"]
+[connection signal="body_exited" from="Detection Radius" to="." method="OnDetectRadiusExit"]

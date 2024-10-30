@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://6n25v8k442sb"]
+[gd_scene load_steps=8 format=3 uid="uid://c2q343ayvcqwc"]
 
 [ext_resource type="PackedScene" uid="uid://h4qbujf84334" path="res://Scenes/LevelTest.tscn" id="1_p3pce"]
 [ext_resource type="PackedScene" uid="uid://dg75ebll3shmq" path="res://Scenes/PlayerCeleste.tscn" id="2_hk57s"]
 [ext_resource type="Texture2D" uid="uid://bu28gimcysm0k" path="res://Assets/Env/_celeste_pico_8bit_worldtiles.png" id="2_njf5h"]
 [ext_resource type="PackedScene" uid="uid://quuvxm5h8nx2" path="res://Scenes/Heart.tscn" id="3_4amw2"]
+[ext_resource type="PackedScene" uid="uid://ct5c22drc2nvr" path="res://Scenes/MetalSonic.tscn" id="5_pb0fk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3t0q2"]
 texture = ExtResource("2_njf5h")
@@ -53,7 +54,10 @@ position = Vector2(170, 424)
 position = Vector2(218, 373)
 
 [node name="Heart7" parent="." instance=ExtResource("3_4amw2")]
-position = Vector2(647, 374)
+position = Vector2(746, 379)
 
 [node name="RespawnPoint" type="Marker2D" parent="."]
 position = Vector2(404, 338)
+
+[node name="Enemy" parent="." instance=ExtResource("5_pb0fk")]
+position = Vector2(649, 380)
