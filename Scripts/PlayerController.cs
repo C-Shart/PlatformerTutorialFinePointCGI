@@ -100,6 +100,12 @@ public partial class PlayerController : CharacterBody2D
         MoveAndSlide();
     }
 
+    public void Respawn()
+    {
+        Show();
+        GameController.Instance.StartHealth = 4;
+    }
+
     private void _ProcessMovement(float delta)
     {
         int _direction = 0;
@@ -120,7 +126,7 @@ public partial class PlayerController : CharacterBody2D
                 }
             }else{
                 _velocity.X = Mathf.Lerp(_velocity.X, 0, _friction);
-                _animationNode.Play("idle");
+                _animationNode.Play("idle");            // no damage animation
             }
         }
     }
@@ -210,6 +216,7 @@ public partial class PlayerController : CharacterBody2D
     {
         if(body is TileMap){
             _isTakingDamage = true;
+            _animationNode.Play("jump pre");        // Damage animation
             GameController.Instance.HeartLost(1);
             _velocity.X *= -2;
             _velocity.Y = -300;

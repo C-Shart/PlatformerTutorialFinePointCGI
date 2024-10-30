@@ -39,3 +39,21 @@ position = Vector2(328, 422)
 
 [node name="Heart2" parent="." instance=ExtResource("3_4amw2")]
 position = Vector2(490, 422)
+
+[node name="Heart3" parent="." instance=ExtResource("3_4amw2")]
+position = Vector2(515, 423)
+
+[node name="Heart4" parent="." instance=ExtResource("3_4amw2")]
+position = Vector2(616, 482)
+
+[node name="Heart5" parent="." instance=ExtResource("3_4amw2")]
+position = Vector2(170, 424)
+
+[node name="Heart6" parent="." instance=ExtResource("3_4amw2")]
+position = Vector2(218, 373)
+
+[node name="Heart7" parent="." instance=ExtResource("3_4amw2")]
+position = Vector2(647, 374)
+
+[node name="RespawnPoint" type="Marker2D" parent="."]
+position = Vector2(404, 338)

@@ -98,7 +98,7 @@ shape = SubResource("RectangleShape2D_7108q")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tmii2")
-animation = &"idle"
+animation = &"jump pre"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
