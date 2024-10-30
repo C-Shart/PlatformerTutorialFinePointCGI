@@ -130,3 +130,4 @@ rotation = -1.5708
 target_position = Vector2(0, 11)
 
 [connection signal="body_entered" from="Area2D" to="." method="OnHitboxEntered"]
+[connection signal="body_exited" from="Area2D" to="." method="OnHitboxExited"]

@@ -27,7 +27,7 @@ layer_0/tile_data = PackedInt32Array(1638455, 65536, 2, 1638456, 65536, 2, 16384
 [node name="Spikes" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_b3qcl")
 format = 2
-layer_0/tile_data = PackedInt32Array(1703950, 262145, 5, 1703951, 262145, 5, 1703952, 262145, 5)
+layer_0/tile_data = PackedInt32Array(1703950, 262145, 5, 1703951, 262145, 5, 1703952, 262145, 5, 1703943, 262145, 5, 1703942, 262145, 5)
 
 [node name="PlayerCeleste" parent="." instance=ExtResource("2_hk57s")]
 position = Vector2(403, 232)

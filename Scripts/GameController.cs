@@ -32,10 +32,6 @@ public partial class GameController : Node
             totalHearts -= value;
         }
 
-        GD.Print($"=======HEART LOSS=======");
-        GD.Print($"Total   : {totalHearts}");
-        GD.Print($"updateUI: {updateUI}");
-
         if (updateUI){
             EventController.Instance.EmitSignal("HeartLost", totalHearts);
             HeartUI.Instance.OnEventHeartLost(totalHearts);

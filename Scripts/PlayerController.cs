@@ -23,6 +23,8 @@ public partial class PlayerController : CharacterBody2D
     private float _climbTimer = 5f;
     private float _climbReset = 5f;
     private bool _isClimbing = false;
+    private int _direction = 0;
+    private bool _isTakingDamage = false;
 
     [Export] public PackedScene GhostPlayerInstance;
 
@@ -34,6 +36,7 @@ public partial class PlayerController : CharacterBody2D
         UpDirection = Vector2.Up;
 
         _animationNode = GetNode<AnimatedSprite2D>("Sprite");
+        _isTakingDamage = false;
     }
 
     public override void _Process(double delta)
@@ -43,7 +46,6 @@ public partial class PlayerController : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
-
         if(!_isDashing && !_isWallJumping){
             _ProcessMovement((float)delta);
         }
@@ -100,23 +102,26 @@ public partial class PlayerController : CharacterBody2D
 
     private void _ProcessMovement(float delta)
     {
-        int direction = 0;
-        if(Input.IsActionPressed("ui_left")){
-            direction -= 1;
-        }
-        if(Input.IsActionPressed("ui_right")){
-            direction += 1;
-        }
+        int _direction = 0;
 
-        if(direction != 0){
-            _velocity.X = Mathf.Lerp(_velocity.X, direction * _speed, _acceleration);
-            if(IsOnFloor()){
-                _animationNode.Play("walk");
-                _animationNode.FlipH = _velocity.X < 0;
+        if(!_isTakingDamage){
+            if(Input.IsActionPressed("ui_left")){
+                _direction -= 1;
             }
-        }else{
-            _velocity.X = Mathf.Lerp(_velocity.X, 0, _friction);
-            _animationNode.Play("idle");
+            if(Input.IsActionPressed("ui_right")){
+                _direction += 1;
+            }
+
+            if(_direction != 0){
+                _velocity.X = Mathf.Lerp(_velocity.X, _direction * _speed, _acceleration);
+                if(IsOnFloor()){
+                    _animationNode.Play("walk");
+                    _animationNode.FlipH = _velocity.X < 0;
+                }
+            }else{
+                _velocity.X = Mathf.Lerp(_velocity.X, 0, _friction);
+                _animationNode.Play("idle");
+            }
         }
     }
 
@@ -203,8 +208,26 @@ public partial class PlayerController : CharacterBody2D
     // Spikes test
     private void OnHitboxEntered(Node2D body)
     {
-        GD.Print("PlayerController.OnHitboxEntered entered!");
-        GameController.Instance.HeartLost(1);
+        if(body is TileMap){
+            GD.Print("OnHitboxEntered: ENTERED");
+            GD.Print($"_isTakingDamage: {_isTakingDamage}, should be: false");
+            _isTakingDamage = true;
+            GameController.Instance.HeartLost(1);
+            _velocity = new Vector2(350f * -_direction, -400);
+            GD.Print($"_isTakingDamage: {_isTakingDamage}, should be: true");
+            GD.Print("OnHitboxEntered: EXITING");
+        }
+    }
+
+    private void OnHitboxExited(Node2D body)
+    {
+        if(body is TileMap){
+            GD.Print("OnHitboxExited: ENTERED");
+            GD.Print($"_isTakingDamage: {_isTakingDamage}, should be: true");
+            _isTakingDamage = false;
+            GD.Print($"_isTakingDamage: {_isTakingDamage}, should be: false");
+            GD.Print("OnHitboxExited: EXITING");
+        }
     }
 
 }
