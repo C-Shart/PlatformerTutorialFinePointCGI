@@ -200,4 +200,11 @@ public partial class PlayerController : CharacterBody2D
         }
     }
 
+    // Spikes test
+    private void OnHitboxEntered(Node2D body)
+    {
+        GD.Print("PlayerController.OnHitboxEntered entered!");
+        GameController.Instance.HeartLost(1);
+    }
+
 }

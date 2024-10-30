@@ -115,8 +115,8 @@ sprite_frames = SubResource("SpriteFrames_mv0hj")
 animation = &"idle"
 
 [node name="Area2D" type="Area2D" parent="AnimatedSprite2D"]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AnimatedSprite2D/Area2D"]
 polygon = PackedVector2Array(-4, -5, 3, -5, 5, -3, 5, 0, -0.5, 5, -6, 0, -6, -3)
