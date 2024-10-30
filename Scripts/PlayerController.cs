@@ -209,24 +209,17 @@ public partial class PlayerController : CharacterBody2D
     private void OnHitboxEntered(Node2D body)
     {
         if(body is TileMap){
-            GD.Print("OnHitboxEntered: ENTERED");
-            GD.Print($"_isTakingDamage: {_isTakingDamage}, should be: false");
             _isTakingDamage = true;
             GameController.Instance.HeartLost(1);
-            _velocity = new Vector2(350f * -_direction, -400);
-            GD.Print($"_isTakingDamage: {_isTakingDamage}, should be: true");
-            GD.Print("OnHitboxEntered: EXITING");
+            _velocity.X *= -2;
+            _velocity.Y = -300;
         }
     }
 
     private void OnHitboxExited(Node2D body)
     {
         if(body is TileMap){
-            GD.Print("OnHitboxExited: ENTERED");
-            GD.Print($"_isTakingDamage: {_isTakingDamage}, should be: true");
             _isTakingDamage = false;
-            GD.Print($"_isTakingDamage: {_isTakingDamage}, should be: false");
-            GD.Print("OnHitboxExited: EXITING");
         }
     }
 
