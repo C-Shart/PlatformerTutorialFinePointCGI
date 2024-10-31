@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtvkfadydmtil"]
+
+[ext_resource type="Script" path="res://Scripts/InterfaceManager.cs" id="1_qna4w"]
+[ext_resource type="Script" path="res://Scripts/DialogueManager.cs" id="2_3u1wt"]
+
+[node name="InterfaceManager" type="CanvasLayer"]
+script = ExtResource("1_qna4w")
+
+[node name="DialogueManager" type="Control" parent="."]
+layout_mode = 3
+anchor_top = 0.722
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 0.399963
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("2_3u1wt")
+
+[node name="PanelContainer" type="PanelContainer" parent="DialogueManager"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="DialogueManager/PanelContainer"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="DialogueManager/PanelContainer/Panel"]
+layout_mode = 2
+offset_right = 1200.0
+offset_bottom = 222.0
+
+[node name="Label" type="Label" parent="DialogueManager/PanelContainer/Panel"]
+layout_mode = 2
+offset_right = 1200.0
+offset_bottom = 28.0
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "NPC NAME"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="DialogueManager/PanelContainer/Panel"]
+layout_mode = 2
+offset_left = 21.0
+offset_top = 37.0
+offset_right = 1182.0
+offset_bottom = 214.0
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "TEST TEST RICHTEXT"
+scroll_following = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DialogueManager/PanelContainer/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.82
+anchor_right = 1.0
+anchor_bottom = 0.973
+offset_left = 11.0
+offset_top = -0.0400085
+offset_right = -13.0
+offset_bottom = -0.00601196
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
